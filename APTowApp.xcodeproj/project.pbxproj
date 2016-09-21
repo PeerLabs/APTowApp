@@ -12,9 +12,11 @@
 		5B6290011D928B9F00BF3221 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B628FFF1D928B9F00BF3221 /* Main.storyboard */; };
 		5B6290031D928B9F00BF3221 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B6290021D928B9F00BF3221 /* Assets.xcassets */; };
 		5B6290061D928B9F00BF3221 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B6290041D928B9F00BF3221 /* LaunchScreen.storyboard */; };
+		F2F1098CE0E7C3BF44E87FD7 /* Pods_APTowApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5BA5428517587554045A6B8 /* Pods_APTowApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45854206BCEA4A8D40B0EAA3 /* Pods-APTowApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APTowApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-APTowApp/Pods-APTowApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5B628FF81D928B9F00BF3221 /* APTowApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APTowApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B628FFB1D928B9F00BF3221 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B628FFD1D928B9F00BF3221 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +24,8 @@
 		5B6290021D928B9F00BF3221 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B6290051D928B9F00BF3221 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B6290071D928B9F00BF3221 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A33FAD2B29AAD4FF8B626974 /* Pods-APTowApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APTowApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-APTowApp/Pods-APTowApp.release.xcconfig"; sourceTree = "<group>"; };
+		C5BA5428517587554045A6B8 /* Pods_APTowApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_APTowApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2F1098CE0E7C3BF44E87FD7 /* Pods_APTowApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		055B5DF2D4587875BB66B0A3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C5BA5428517587554045A6B8 /* Pods_APTowApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		167A5740AF4DECC539A7AF51 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				45854206BCEA4A8D40B0EAA3 /* Pods-APTowApp.debug.xcconfig */,
+				A33FAD2B29AAD4FF8B626974 /* Pods-APTowApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5B628FEF1D928B9F00BF3221 = {
 			isa = PBXGroup;
 			children = (
 				5B628FFA1D928B9F00BF3221 /* APTowApp */,
 				5B628FF91D928B9F00BF3221 /* Products */,
+				167A5740AF4DECC539A7AF51 /* Pods */,
+				055B5DF2D4587875BB66B0A3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5B62900A1D928B9F00BF3221 /* Build configuration list for PBXNativeTarget "APTowApp" */;
 			buildPhases = (
+				20680D978A7BA284AB9FF325 /* [CP] Check Pods Manifest.lock */,
 				5B628FF41D928B9F00BF3221 /* Sources */,
 				5B628FF51D928B9F00BF3221 /* Frameworks */,
 				5B628FF61D928B9F00BF3221 /* Resources */,
+				420B08E632795FC1596D273B /* [CP] Embed Pods Frameworks */,
+				30EF461611CAB13B6C5D49E3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,6 +156,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		20680D978A7BA284AB9FF325 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		30EF461611CAB13B6C5D49E3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-APTowApp/Pods-APTowApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		420B08E632795FC1596D273B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-APTowApp/Pods-APTowApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5B628FF41D928B9F00BF3221 /* Sources */ = {
@@ -249,6 +324,7 @@
 		};
 		5B62900B1D928B9F00BF3221 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45854206BCEA4A8D40B0EAA3 /* Pods-APTowApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = APTowApp/Info.plist;
@@ -260,6 +336,7 @@
 		};
 		5B62900C1D928B9F00BF3221 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A33FAD2B29AAD4FF8B626974 /* Pods-APTowApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = APTowApp/Info.plist;
@@ -288,6 +365,7 @@
 				5B62900C1D928B9F00BF3221 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -21,17 +21,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var accessTokenLabel: UILabel!
     @IBOutlet weak var uidLabel: UILabel!
-    //@IBOutlet weak var logonTimeLabel: UILabel!
+    @IBOutlet weak var logonTimeLabel: UILabel!
     
-    //Location info Labels
+    //Current Location Info Labels
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var lattitudeLabel: UILabel!
+    
+    //Last Posted Location Info Labels
+    @IBOutlet weak var lastPostedLongitudeLabel: UILabel!
+    @IBOutlet weak var lastPostedLattitudeLabel: UILabel!
+    @IBOutlet weak var lastPostedTimeStampLabel: UILabel!
     
     //Model Objets
     var isLoggedIn = false
     var towLogin : TowLogin?
     var username : String?
     var password : String?
+    
+    //Formatter Objects
+    let dateFormatter = NSDateFormatter()
     
     //Location Manager
     let locationManager = CLLocationManager()
@@ -47,6 +55,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         self.logoutButton.enabled = false
         self.logoutButton.setTitleColor(UIColor.grayColor(), forState: .Disabled)
+        
+        dateFormatter.dateFormat = "dd MMM YYYY, HH:mm:ss"
         
         log?.debug("Finished!")
         
@@ -153,64 +163,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         //Present the alert controller
         self.presentViewController(alertController, animated: true, completion:nil)
-        
-//        log?.debug("UsernameLabel = \(self.usernameLabel)")
-//        
-//        let username = self.usernameLabel.text as String?
-//        let password = self.passwordLabel.text as String?
-//        
-//        guard (username != nil) else {
-//            
-//            log?.debug("Detected Nil Username")
-//            
-//            let alertController = UIAlertController(title: "Error", message: "You need to enter a username!", preferredStyle: .Alert)
-//            
-//            let retryAction = UIAlertAction(title: "Retry", style: .Default) {
-//                
-//                (action:UIAlertAction) in
-//                
-//                log?.debug("You Pressed Retry Button");
-//                
-//                self.usernameLabel.text = ""
-//                self.passwordLabel.text = ""
-//            }
-//            
-//            alertController.addAction(retryAction)
-//            self.presentViewController(alertController, animated: true, completion:nil)
-        
-//            log?.debug("Finished!")
-//            
-//            return
-//            
-//        }
-        
-//        guard (password != nil) else {
-//            
-//            log?.debug("Detected Nil Password")
-//            
-//            let alertController = UIAlertController(title: "Error", message: "You need to enter a password!", preferredStyle: .Alert)
-//            
-//            let retryAction = UIAlertAction(title: "Retry", style: .Default) {
-//                
-//                (action:UIAlertAction) in
-//                
-//                log?.debug("You Pressed Retry Button");
-//                
-//                self.usernameLabel.text = ""
-//                self.passwordLabel.text = ""
-//            }
-//            
-//            alertController.addAction(retryAction)
-//            self.presentViewController(alertController, animated: true, completion:nil)
-    
-//            log?.debug("Finished!")
-//            
-//            return
-//
-//            
-//        }
-//        
-//
         
         log?.debug("Finished!")
         
@@ -325,6 +277,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             
             self.uidLabel.text = String(uid!)
             
+            self.logonTimeLabel.text = self.dateFormatter.stringFromDate(NSDate())
+            
             self.loginButton.enabled = false
             self.loginButton.setTitleColor(UIColor.grayColor(), forState: .Disabled)
             self.logoutButton.enabled = true
@@ -376,7 +330,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         //Date Time Objects
         let date = NSDate()
         let calender = NSCalendar.currentCalendar()
-        let components = calender.components([.Minute, .Second], fromDate: date)
+        let components = calender.components([.Hour, .Minute, .Second], fromDate: date)
         let seconds = components.second
         
         if (seconds % self.updateSecondsInterval == 0) {
@@ -399,8 +353,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     
                 case 200:
                     
-                    
                     log?.debug("We successfully posted (Longitude = \(longitude), Lattitude = \(latitude) to API with accessToken \"\((self.towLogin?.accessToken)!) and UserID of \(self.towLogin?.uid)!)")
+                    self.lastPostedLattitudeLabel.text = latitude
+                    self.lastPostedLongitudeLabel.text = longitude
                     
                 case 400:
                     

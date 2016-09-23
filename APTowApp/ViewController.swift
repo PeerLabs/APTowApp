@@ -60,6 +60,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    // MARK: Lifecycle
+    
     override func viewDidLoad() {
         
         log?.debug("Started!")
@@ -89,6 +91,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         log?.debug("Finished!")
         
     }
+    
+    // MARK: Button Taps
 
     @IBAction func loginButtonTapped(sender: AnyObject) {
         
@@ -184,6 +188,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         log?.debug("Finished!")
         
     }
+    
+    @IBAction func logoutButtonTapped(sender: AnyObject) {
+        
+        log?.debug("Started!")
+        
+        self.locationManager.stopUpdatingLocation()
+        
+        self.logoutOfTow()
+        
+        log?.debug("Finished!")
+        
+    }
+    
+    // MARK: Login
     
     func loginToTow() {
         
@@ -316,48 +334,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-    @IBAction func logoutButtonTapped(sender: AnyObject) {
-        
-        log?.debug("Started!")
-        
-        self.locationManager.stopUpdatingLocation()
-        
-        self.logoutOfTow()
-        
-        log?.debug("Finished!")
-        
-    }
-    
+
+    // MARK: Logout
     
     func logoutOfTow() {
         
         log?.debug("Started!")
-        
-//        TowAPIManager.sharedInstance.getLogout((self.towLogin?.accessToken)!) //{ (result) in
-//
-//            guard result.error == nil else {
-//                
-//                log?.debug("An error occured whilst trying to logout. Error: \(result.error)")
-//                
-//                return
-//                
-//            }
-//            
-//            let towResp = result.value!
-//            
-//            switch (towResp.statusCode!) {
-//                
-//            default:
-//                
-//                
-//                
-//                
-//            }
-
-            
-            
-            
-//        }
         
         self.messageLabel.text = "Currently No User Installed!"
         self.accessTokenLabel.text = self.notSetText
@@ -376,13 +358,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         self.logoutButton.enabled = false
         self.loginButton.enabled = true
         
-//        self.username = ""
-//        self.password = ""
-        
         log?.debug("Finished!")
         
     }
     
+    // MARK: Location
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         

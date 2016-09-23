@@ -29,7 +29,7 @@ class TowAPIManager {
         
     }
     
-    
+    // MARK: GET LOGIN
     
     func getLogin(username: String, password: String, completionHandler: (Result<TowLogin, NSError>) -> Void) {
         
@@ -55,6 +55,8 @@ class TowAPIManager {
 
     }
     
+    // MARK: POST LOCATION
+    
     func postLocation(accessToken: String, uid: Int , latitude: AnyObject, longitude: AnyObject, completionHandler: (Result<TowResponse, NSError>) -> Void) {
         
         log?.debug("Started!")
@@ -76,6 +78,8 @@ class TowAPIManager {
         log?.debug("Finished!")
         
     }
+    
+    // MARK: GET LOGOUT
     
     func getLogout(accessToken: String) { //, completionHandler: (Result<TowResponse, NSError>) -> Void) {
         

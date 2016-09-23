@@ -14,7 +14,6 @@ extension Alamofire.Request {
     
     public func responseObject<T: ResponseJSONObjectSerializable>(completionHandler: Response<T, NSError> -> Void) -> Self {
         
-        
         let serializer = ResponseSerializer<T, NSError> { request, response, data, error in
             
             

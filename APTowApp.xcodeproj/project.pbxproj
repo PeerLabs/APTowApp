@@ -19,7 +19,6 @@
 		5B6290171D92EB2D00BF3221 /* TowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6290161D92EB2D00BF3221 /* TowRouter.swift */; };
 		5B6290191D92F37000BF3221 /* TowAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6290181D92F37000BF3221 /* TowAPIManager.swift */; };
 		5B62901C1D92F47600BF3221 /* TowLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B62901B1D92F47600BF3221 /* TowLogin.swift */; };
-		5B62901E1D94368900BF3221 /* LoggedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B62901D1D94368900BF3221 /* LoggedInViewController.swift */; };
 		6B68699F6E29D5731EEEC8AA /* Pods_APTowApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3C90E9984CCDB3B955B386 /* Pods_APTowApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +39,6 @@
 		5B6290161D92EB2D00BF3221 /* TowRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TowRouter.swift; sourceTree = "<group>"; };
 		5B6290181D92F37000BF3221 /* TowAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TowAPIManager.swift; sourceTree = "<group>"; };
 		5B62901B1D92F47600BF3221 /* TowLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TowLogin.swift; sourceTree = "<group>"; };
-		5B62901D1D94368900BF3221 /* LoggedInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedInViewController.swift; sourceTree = "<group>"; };
 		A33FAD2B29AAD4FF8B626974 /* Pods-APTowApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APTowApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-APTowApp/Pods-APTowApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,7 +101,6 @@
 				5B6290021D928B9F00BF3221 /* Assets.xcassets */,
 				5B6290041D928B9F00BF3221 /* LaunchScreen.storyboard */,
 				5B6290071D928B9F00BF3221 /* Info.plist */,
-				5B62901D1D94368900BF3221 /* LoggedInViewController.swift */,
 			);
 			path = APTowApp;
 			sourceTree = "<group>";
@@ -268,7 +265,6 @@
 				5B62900F1D92E86E00BF3221 /* ResponseJSONObjectSerializable.swift in Sources */,
 				5B6290151D92EA0E00BF3221 /* AlamofireRequest+JSONSerializable.swift in Sources */,
 				5B62901C1D92F47600BF3221 /* TowLogin.swift in Sources */,
-				5B62901E1D94368900BF3221 /* LoggedInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

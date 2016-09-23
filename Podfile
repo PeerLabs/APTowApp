@@ -8,5 +8,7 @@ target 'APTowApp' do
 
     # Pods for APTowApp
     pod 'XCGLogger', '~> 3.5.3'
+    pod 'SwiftyJSON', '~> 2.3.0'
+    pod 'Alamofire', '~> 3.0.0'
 
 end

@@ -7,15 +7,45 @@
 //
 
 import UIKit
+import XCGLogger
+import CoreLocation
+
+//Logger Configuration for DEBUG MODE
+let log: XCGLogger? = {
+    
+    #if DEBUG
+        
+        // Create a logger object with no destinations
+        let log = XCGLogger.defaultInstance()
+        
+        return log
+    
+    #else
+    
+        return nil
+        
+    #endif
+    
+}()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    let locationManager = CLLocationManager() // Add this statement
+    
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //Configure Logger
+        
+        log?.setup(.Debug, showLogIdentifier: true, showFunctionName: true, showThreadName: false, showLogLevel: true, showFileNames: false, showLineNumbers: true, showDate: true, writeToFile: nil, fileLogLevel: .Debug)
+        
+//        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        
         return true
     }
 

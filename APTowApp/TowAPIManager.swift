@@ -77,24 +77,24 @@ class TowAPIManager {
         
     }
     
-    func getLogout(accessToken: String, completionHandler: (Result<TowResponse, NSError>) -> Void) {
+    func getLogout(accessToken: String) { //, completionHandler: (Result<TowResponse, NSError>) -> Void) {
         
         log?.debug("Started!")
         
-        Alamofire.request(TowRouter.GetLogout(accessToken: accessToken)).responseObject { (response: Response<TowResponse, NSError>) in
-            
-            guard let towResp = response.result.value else {
-                log?.debug(response.result.error)
-                completionHandler(response.result)
-                return
-                
-            }
-            
-            log?.debug("Finished!")
-            
-            completionHandler(.Success(towResp))
-            
-        }
+        Alamofire.request(TowRouter.GetLogout(accessToken: accessToken))//.responseObject { (response: Response<TowResponse, NSError>) in
+//            
+//            guard let towResp = response.result.value else {
+//                log?.debug(response.result.error)
+//                completionHandler(response.result)
+//                return
+//                
+//            }
+//            
+//            log?.debug("Finished!")
+//            
+//            completionHandler(.Success(towResp))
+//            
+//        }
         
         log?.debug("Finished!")
         

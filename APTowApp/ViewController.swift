@@ -31,12 +31,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var lastPostedLongitudeLabel: UILabel!
     @IBOutlet weak var lastPostedLattitudeLabel: UILabel!
     @IBOutlet weak var lastPostedTimeStampLabel: UILabel!
+    @IBOutlet weak var numberOfPostsLabel: UILabel!
     
     //Model Objets
     var isLoggedIn = false
     var towLogin : TowLogin?
-    var username : String?
-    var password : String?
+    var username = ""
+    var password = ""
     
     //Formatter Objects
     let dateFormatter = NSDateFormatter()
@@ -48,6 +49,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let updateSecondsInterval = 30 //  Between 1 - 60
     
     let notSetText = "<not set>"
+    
+    var numberOfPosts = 0 {
+        
+        didSet{
+            
+            self.numberOfPostsLabel.text = String(numberOfPosts)
+            
+        }
+        
+    }
     
     override func viewDidLoad() {
         
@@ -61,6 +72,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 //        self.logoutButton.hidden = true
         
         dateFormatter.dateFormat = "dd MMM YYYY, HH:mm:ss"
+        
+        self.numberOfPostsLabel.text = String(numberOfPosts)
         
         log?.debug("Finished!")
         
@@ -176,10 +189,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         log?.debug("Started!")
         
-        log?.debug("Username = \(self.username!)")
-        log?.debug("Password = \(self.password!)")
+        log?.debug("Username = \(self.username)")
+        log?.debug("Password = \(self.password)")
         
-        TowAPIManager.sharedInstance.getLogin(self.username!, password: self.password!) { (result) in
+        TowAPIManager.sharedInstance.getLogin(self.username, password: self.password) { (result) in
             
             guard result.error == nil else {
                 
@@ -273,7 +286,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             
             self.accessTokenLabel.text = self.towLogin?.accessToken!
             
-            self.messageLabel.text = "User \"\(self.username!)\" Logged In!"
+            self.messageLabel.text = "User \"\(self.username)\" Logged In!"
             
             let uid = self.towLogin?.uid!
             
@@ -307,6 +320,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         log?.debug("Started!")
         
+        self.locationManager.stopUpdatingLocation()
+        
         self.logoutOfTow()
         
         log?.debug("Finished!")
@@ -318,55 +333,54 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         log?.debug("Started!")
         
-        TowAPIManager.sharedInstance.getLogout((self.towLogin?.accessToken)!) { (result) in
-            
-            guard result.error == nil else {
-                
-                log?.debug("An error occured whilst trying to logout. Error: \(result.error)")
-                
-                return
-                
-            }
-            
-            let towResp = result.value!
-            
-            switch (towResp.statusCode!) {
-                
-            default:
-                
-                self.towLogin?.accessToken = nil
-                self.towLogin?.uid = nil
-                self.towLogin?.statusCode = nil
-                self.towLogin?.errorMessage = nil
-                self.username = nil
-                self.password = nil
-                
-                self.accessTokenLabel.text = self.notSetText
-                
-                self.uidLabel.text = self.notSetText
-                self.logonTimeLabel.text = self.notSetText
-                
-                self.locationManager.stopUpdatingLocation()
-                self.lattitudeLabel.text = self.notSetText
-                self.longitudeLabel.text = self.notSetText
-                
-                self.lastPostedTimeStampLabel.text = self.notSetText
-                self.lastPostedLongitudeLabel.text = self.notSetText
-                self.lastPostedLattitudeLabel.text = self.notSetText
-                
-                self.loginButton.enabled = true
-//                self.loginButton.hidden = false
-                self.logoutButton.enabled = false
-//                self.logoutButton.hidden = true
-                
-                
-            }
+//        TowAPIManager.sharedInstance.getLogout((self.towLogin?.accessToken)!) //{ (result) in
+//
+//            guard result.error == nil else {
+//                
+//                log?.debug("An error occured whilst trying to logout. Error: \(result.error)")
+//                
+//                return
+//                
+//            }
+//            
+//            let towResp = result.value!
+//            
+//            switch (towResp.statusCode!) {
+//                
+//            default:
+//                
+//                
+//                
+//                
+//            }
 
             
             
             
-        }
+//        }
+        
+        self.messageLabel.text = "Currently No User Installed!"
+        self.accessTokenLabel.text = self.notSetText
+        self.uidLabel.text = self.notSetText
+        self.logonTimeLabel.text = self.notSetText
+        self.lattitudeLabel.text = self.notSetText
+        self.longitudeLabel.text = self.notSetText
+        self.lastPostedLattitudeLabel.text = self.notSetText
+        self.lastPostedLongitudeLabel.text = self.notSetText
+        self.lastPostedTimeStampLabel.text = self.notSetText
+        self.towLogin?.accessToken = nil
+        self.towLogin?.uid = nil
+        self.towLogin?.statusCode = nil
+        self.towLogin?.errorMessage = nil
+
+        self.logoutButton.enabled = false
+        self.loginButton.enabled = true
+        
+//        self.username = ""
+//        self.password = ""
+        
         log?.debug("Finished!")
+        
     }
     
     
@@ -404,9 +418,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         if (seconds % self.updateSecondsInterval == 0) {
             
-            log?.debug("Updating API with (Longitude = \(longitude), Lattitude = \(latitude)")
+            log?.debug("Updating API with (Longitude = \(longitude), Lattitude = \(latitude))")
             
-            TowAPIManager.sharedInstance.postLocation((self.towLogin?.accessToken)!, uid: (self.towLogin?.uid)!, latitude: latitude, longitude: longitude) { (result) in
+            guard let token = self.towLogin?.accessToken! else {
+                
+                return
+                
+                
+            }
+            guard let uid = self.towLogin?.uid! else {
+                
+                return
+            }
+            
+            TowAPIManager.sharedInstance.postLocation(token, uid: uid, latitude: latitude, longitude: longitude) { (result) in
                 
                 guard result.error == nil else {
                     
@@ -422,14 +447,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     
                 case 200:
                     
-                    log?.debug("We successfully posted (Longitude = \(longitude), Lattitude = \(latitude) to API with accessToken \"\((self.towLogin?.accessToken)!) and UserID of \(self.towLogin?.uid)!)")
+                    log?.debug("We successfully posted (Longitude = \(longitude), Lattitude = \(latitude) to API with accessToken \"\((self.towLogin?.accessToken)!) and UserID of \((self.towLogin?.uid)!)")
                     self.lastPostedLattitudeLabel.text = latitude
                     self.lastPostedLongitudeLabel.text = longitude
                     self.lastPostedTimeStampLabel.text = self.dateFormatter.stringFromDate(NSDate())
+                    self.numberOfPosts += 1
                     
                 case 400:
                     
-                    log?.debug("An Error occured while trying to post (Longitude = \(longitude), Lattitude = \(latitude) to API with accessToken \"\((self.towLogin?.accessToken)!) and UserID of \(self.towLogin?.uid)!)")
+                    log?.debug("An Error occured while trying to post (Longitude = \(longitude), Lattitude = \(latitude) to API with accessToken \"\((self.towLogin?.accessToken)!) and UserID of \((self.towLogin?.uid)!)")
                     log?.debug("Status Code: \(towlocationPostResp.statusCode!)")
                     log?.debug("Error Message: \(towlocationPostResp.errorMessage!)")
                     
@@ -446,7 +472,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     
                 default:
                     
-                    log?.debug("An Error occured while trying to post (Longitude = \(longitude), Lattitude = \(latitude) to API with accessToken \"\((self.towLogin?.accessToken)!) and UserID of \(self.towLogin?.uid)!)")
+                    log?.debug("An Error occured while trying to post (Longitude = \(longitude), Lattitude = \(latitude) to API with accessToken \"\(token) and UserID of \(uid)")
                     log?.debug("Status Code: \(towlocationPostResp.statusCode!)")
                     log?.debug("Error Message: \(towlocationPostResp.errorMessage!)")
                     

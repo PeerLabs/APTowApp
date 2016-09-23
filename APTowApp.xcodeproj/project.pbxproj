@@ -164,6 +164,7 @@
 				TargetAttributes = {
 					5B628FF71D928B9F00BF3221 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 8ND94GJC38;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -383,6 +384,7 @@
 			baseConfigurationReference = 45854206BCEA4A8D40B0EAA3 /* Pods-APTowApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -400,6 +402,7 @@
 			baseConfigurationReference = A33FAD2B29AAD4FF8B626974 /* Pods-APTowApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",

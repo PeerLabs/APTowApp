@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B03E6251D94A01D00017356 /* TowLocationPostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B03E6241D94A01D00017356 /* TowLocationPostResponse.swift */; };
+		5B03E6271D94C09B00017356 /* TowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B03E6261D94C09B00017356 /* TowResponse.swift */; };
 		5B628FFC1D928B9F00BF3221 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B628FFB1D928B9F00BF3221 /* AppDelegate.swift */; };
 		5B628FFE1D928B9F00BF3221 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B628FFD1D928B9F00BF3221 /* ViewController.swift */; };
 		5B6290011D928B9F00BF3221 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B628FFF1D928B9F00BF3221 /* Main.storyboard */; };
@@ -26,7 +26,7 @@
 /* Begin PBXFileReference section */
 		45854206BCEA4A8D40B0EAA3 /* Pods-APTowApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APTowApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-APTowApp/Pods-APTowApp.debug.xcconfig"; sourceTree = "<group>"; };
 		4C3C90E9984CCDB3B955B386 /* Pods_APTowApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_APTowApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B03E6241D94A01D00017356 /* TowLocationPostResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TowLocationPostResponse.swift; sourceTree = "<group>"; };
+		5B03E6261D94C09B00017356 /* TowResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TowResponse.swift; sourceTree = "<group>"; };
 		5B628FF81D928B9F00BF3221 /* APTowApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APTowApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B628FFB1D928B9F00BF3221 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B628FFD1D928B9F00BF3221 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				5B62901B1D92F47600BF3221 /* TowLogin.swift */,
-				5B03E6241D94A01D00017356 /* TowLocationPostResponse.swift */,
+				5B03E6261D94C09B00017356 /* TowResponse.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -260,13 +260,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B628FFE1D928B9F00BF3221 /* ViewController.swift in Sources */,
+				5B03E6271D94C09B00017356 /* TowResponse.swift in Sources */,
 				5B6290191D92F37000BF3221 /* TowAPIManager.swift in Sources */,
 				5B628FFC1D928B9F00BF3221 /* AppDelegate.swift in Sources */,
 				5B6290171D92EB2D00BF3221 /* TowRouter.swift in Sources */,
 				5B62900F1D92E86E00BF3221 /* ResponseJSONObjectSerializable.swift in Sources */,
 				5B6290151D92EA0E00BF3221 /* AlamofireRequest+JSONSerializable.swift in Sources */,
 				5B62901C1D92F47600BF3221 /* TowLogin.swift in Sources */,
-				5B03E6251D94A01D00017356 /* TowLocationPostResponse.swift in Sources */,
 				5B62901E1D94368900BF3221 /* LoggedInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

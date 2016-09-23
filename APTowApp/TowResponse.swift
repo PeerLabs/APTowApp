@@ -1,5 +1,5 @@
 //
-//  TowLocationPostResponse.swift
+//  TowResponse.swift
 //  APTowApp
 //
 //  Created by Abrar Peer on 23/09/2016.
@@ -9,13 +9,13 @@
 import Foundation
 import SwiftyJSON
 
-class TowLocationPostResponse : ResponseJSONObjectSerializable, CustomStringConvertible {
+class TowResponse : ResponseJSONObjectSerializable, CustomStringConvertible {
     
     var statusCode : Int?
     var errorMessage : String?
     
     required init(json: JSON) {
-
+        
         self.statusCode = json["status"].int
         self.errorMessage = json["error"].string
         
@@ -30,6 +30,5 @@ class TowLocationPostResponse : ResponseJSONObjectSerializable, CustomStringConv
         return "Status: \(self.statusCode), Error: \(self.errorMessage)"
         
     }
-    
     
 }

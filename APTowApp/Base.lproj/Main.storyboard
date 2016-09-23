@@ -373,6 +373,9 @@
                                                 </fragment>
                                             </attributedString>
                                         </state>
+                                        <connections>
+                                            <action selector="logoutOfTow:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Bd-GW-c02"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

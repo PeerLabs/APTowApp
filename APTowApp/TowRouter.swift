@@ -19,6 +19,8 @@ enum TowRouter : URLRequestConvertible {
     
     case PostLocation(accessToken: String, userId: Int, lat: AnyObject, lng: AnyObject) // POST https://tow.com.au/api/ios/ping.json
     
+    case GetLogout(accessToken: String) //GET https://tow.com.au/api/ios/login.json
+    
     var URLRequest: NSMutableURLRequest {
         
         var method: Alamofire.Method {
@@ -32,6 +34,10 @@ enum TowRouter : URLRequestConvertible {
             case .PostLocation:
             
                 return .POST
+                
+            case .GetLogout:
+                
+                return .GET
                 
             }
             
@@ -53,8 +59,13 @@ enum TowRouter : URLRequestConvertible {
                 
                 return ("/ping.json", params)
                 
+            case .GetLogout(let accessToken ):
+                
+                let params = ["apiKey": "7dc82bcd2b458b0a9fca5528c6672d60", "accessToken": accessToken]
+                
+                return ("/logout.json", params)
+                
             }
-
             
         }()
         

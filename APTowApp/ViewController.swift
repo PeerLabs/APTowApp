@@ -47,14 +47,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     //Update Interval 
     let updateSecondsInterval = 30 //  Between 1 - 60
     
+    let notSetText = "<not set>"
+    
     override func viewDidLoad() {
         
         log?.debug("Started!")
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        self.loginButton.enabled = true
+//        self.loginButton.hidden = false
         self.logoutButton.enabled = false
-        self.logoutButton.setTitleColor(UIColor.grayColor(), forState: .Disabled)
+//        self.logoutButton.hidden = true
         
         dateFormatter.dateFormat = "dd MMM YYYY, HH:mm:ss"
         
@@ -225,10 +229,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 
             }
             
-            
-                
-            self.messageLabel.text = "User \"\(self.username!)\" Logged In!"
-            
             guard (self.towLogin?.accessToken != nil) else {
                 
                 let alertController = UIAlertController(title: "Login Error", message: "Did not Recieve an Access Token. Please try logging again!", preferredStyle: .Alert)
@@ -249,8 +249,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 return
 
             }
-            
-            self.accessTokenLabel.text = self.towLogin?.accessToken!
             
             guard (self.towLogin?.uid != nil) else {
                 
@@ -273,6 +271,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 
             }
             
+            self.accessTokenLabel.text = self.towLogin?.accessToken!
+            
+            self.messageLabel.text = "User \"\(self.username!)\" Logged In!"
+            
             let uid = self.towLogin?.uid!
             
             self.uidLabel.text = String(uid!)
@@ -280,9 +282,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             self.logonTimeLabel.text = self.dateFormatter.stringFromDate(NSDate())
             
             self.loginButton.enabled = false
-            self.loginButton.setTitleColor(UIColor.grayColor(), forState: .Disabled)
+//            self.loginButton.hidden = true
             self.logoutButton.enabled = true
-            self.logoutButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+//            self.logoutButton.hidden = false
             
             
             if CLLocationManager.authorizationStatus() == .NotDetermined {
@@ -300,6 +302,73 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         log?.debug("Finished!")
         
     }
+    
+    @IBAction func logoutButtonTapped(sender: AnyObject) {
+        
+        log?.debug("Started!")
+        
+        self.logoutOfTow()
+        
+        log?.debug("Finished!")
+        
+    }
+    
+    
+    func logoutOfTow() {
+        
+        log?.debug("Started!")
+        
+        TowAPIManager.sharedInstance.getLogout((self.towLogin?.accessToken)!) { (result) in
+            
+            guard result.error == nil else {
+                
+                log?.debug("An error occured whilst trying to logout. Error: \(result.error)")
+                
+                return
+                
+            }
+            
+            let towResp = result.value!
+            
+            switch (towResp.statusCode!) {
+                
+            default:
+                
+                self.towLogin?.accessToken = nil
+                self.towLogin?.uid = nil
+                self.towLogin?.statusCode = nil
+                self.towLogin?.errorMessage = nil
+                self.username = nil
+                self.password = nil
+                
+                self.accessTokenLabel.text = self.notSetText
+                
+                self.uidLabel.text = self.notSetText
+                self.logonTimeLabel.text = self.notSetText
+                
+                self.locationManager.stopUpdatingLocation()
+                self.lattitudeLabel.text = self.notSetText
+                self.longitudeLabel.text = self.notSetText
+                
+                self.lastPostedTimeStampLabel.text = self.notSetText
+                self.lastPostedLongitudeLabel.text = self.notSetText
+                self.lastPostedLattitudeLabel.text = self.notSetText
+                
+                self.loginButton.enabled = true
+//                self.loginButton.hidden = false
+                self.logoutButton.enabled = false
+//                self.logoutButton.hidden = true
+                
+                
+            }
+
+            
+            
+            
+        }
+        log?.debug("Finished!")
+    }
+    
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         
@@ -356,12 +425,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     log?.debug("We successfully posted (Longitude = \(longitude), Lattitude = \(latitude) to API with accessToken \"\((self.towLogin?.accessToken)!) and UserID of \(self.towLogin?.uid)!)")
                     self.lastPostedLattitudeLabel.text = latitude
                     self.lastPostedLongitudeLabel.text = longitude
+                    self.lastPostedTimeStampLabel.text = self.dateFormatter.stringFromDate(NSDate())
                     
                 case 400:
                     
                     log?.debug("An Error occured while trying to post (Longitude = \(longitude), Lattitude = \(latitude) to API with accessToken \"\((self.towLogin?.accessToken)!) and UserID of \(self.towLogin?.uid)!)")
                     log?.debug("Status Code: \(towlocationPostResp.statusCode!)")
                     log?.debug("Error Message: \(towlocationPostResp.errorMessage!)")
+                    
+                    self.messageLabel.text = "Logging Out"
+                    
+                    self.logoutOfTow()
                     
                     self.messageLabel.text = "Relogging in!"
                     
@@ -375,6 +449,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     log?.debug("An Error occured while trying to post (Longitude = \(longitude), Lattitude = \(latitude) to API with accessToken \"\((self.towLogin?.accessToken)!) and UserID of \(self.towLogin?.uid)!)")
                     log?.debug("Status Code: \(towlocationPostResp.statusCode!)")
                     log?.debug("Error Message: \(towlocationPostResp.errorMessage!)")
+                    
+                    self.messageLabel.text = "Logging Out"
+                    
+                    self.logoutOfTow()
                     
                     self.messageLabel.text = "Relogging in!"
                     
